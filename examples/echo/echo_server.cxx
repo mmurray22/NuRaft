@@ -28,6 +28,8 @@ limitations under the License.
 
 #include <stdio.h>
 
+#include <random>
+#include "logging/logging.hxx"
 using namespace nuraft;
 
 namespace echo_server {
@@ -144,7 +146,7 @@ void help(const std::string& cmd,
     << "\n";
 }
 
-bool do_cmd(const std::vector<std::string>& tokens) {
+bool do_cmd(const std::vector<std::string>& tokens, int server_id) {
     if (!tokens.size()) return true;
 
     const std::string& cmd = tokens[0];
@@ -169,6 +171,32 @@ bool do_cmd(const std::vector<std::string>& tokens) {
 
     } else if ( cmd == "h" || cmd == "help" ) {
         help(cmd, tokens);
+    } else if ( cmd == "order_test" ) {
+	std::string filename = "echo_server";
+	Trace newTrace(0, 0, 3, filename, 30);
+	std::string command1 = "command_one";
+	std::string command2 = "command_two";
+	const std::string& append_log_cmd = "msg";
+	std::vector<std::string> cmds;
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0,2);
+	if (distribution(generator) == 0) {
+		cmds.push_back("msg");
+		cmds.push_back(command1);
+		append_log(append_log_cmd, cmds);
+		cmds.clear();
+		cmds.push_back("msg");
+		cmds.push_back(command2);
+		append_log(append_log_cmd, cmds);
+	} else {
+		cmds.push_back("msg");
+		cmds.push_back(command2);
+		append_log(append_log_cmd, cmds);
+		cmds.clear();
+		cmds.push_back("msg");
+		cmds.push_back(command1);
+		append_log(append_log_cmd, cmds);
+	}
     }
     return true;
 }

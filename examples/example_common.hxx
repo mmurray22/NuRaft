@@ -115,7 +115,7 @@ void server_list(const std::string& cmd,
     }
 }
 
-bool do_cmd(const std::vector<std::string>& tokens);
+bool do_cmd(const std::vector<std::string>& tokens, int server_id);
 
 std::vector<std::string> tokenize(const char* str, char c = ' ') {
     std::vector<std::string> tokens;
@@ -142,7 +142,7 @@ void loop() {
         }
 
         std::vector<std::string> tokens = tokenize(cmd);
-        bool cont = do_cmd(tokens);
+        bool cont = do_cmd(tokens, stuff.server_id_);
         if (!cont) break;
     }
 }

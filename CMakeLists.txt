@@ -61,6 +61,7 @@ endif ()
 # === Includes ===
 include_directories(BEFORE ./)
 include_directories(BEFORE ${ASIO_INCLUDE_DIR})
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}examples/echo/trace_library)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include/libnuraft)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/examples)
@@ -76,6 +77,10 @@ else()
     message(STATUS "deps prefix is not given")
 endif()
 
+#include(FindProtobuf)
+# Find required protobuf package
+#find_package(protobuf CONFIG REQUIRED)
+message(STATUS "Using Protocol Buffers ${Protobuf_VERSION}")
 
 # === Compiler flags ===
 if (NOT WIN32)
@@ -85,6 +90,7 @@ if (NOT WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lprotobuf")
     if (APPLE)
 #        include_directories(BEFORE
 #                /usr/local/opt/openssl/include
@@ -197,13 +203,15 @@ endif()
 if (NOT WIN32)
     set(LIBDL dl)
     set(LIBZ z)
+    set(LIBPROTO protobuf)
 endif()
 set(LIBRARIES
     ${LIBSSL}
     ${LIBCRYPTO}
     ${LIBBOOST_SYSTEM}
     ${LIBDL}
-    ${LIBZ})
+    ${LIBZ}
+    ${LIBPROTO})
 
 
 # === Paths ===

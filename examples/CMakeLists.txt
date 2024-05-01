@@ -13,7 +13,10 @@ target_link_libraries(calc_server
 add_executable(echo_server
                echo/echo_server.cxx
                logger.cc
-               in_memory_log_store.cxx)
+               in_memory_log_store.cxx
+	       echo/logging/logging.cxx
+	       echo/logging/proto/trace.pb.h
+	       echo/logging/proto/trace.pb.cc)
 add_dependencies(echo_server
                  static_lib)
 target_link_libraries(echo_server
