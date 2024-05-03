@@ -14,7 +14,7 @@ add_executable(echo_server
                echo/echo_server.cxx
                logger.cc
                in_memory_log_store.cxx
-	       echo/logging/logging.cxx
+	       echo/logging/logging.cpp
 	       echo/logging/proto/trace.pb.h
 	       echo/logging/proto/trace.pb.cc)
 add_dependencies(echo_server

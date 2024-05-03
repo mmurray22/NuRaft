@@ -26,8 +26,10 @@ message TraceRecord {
 	uint64 trace_time = 1;
 	EntryType type = 2;
 	uint64 leader_id = 3;
-	optional uint64 thread_id = 4; //Uniquely identifying the execution context
-	MessageInfo msg_info = 5;
+	string msg = 4;
+	uint64 slot = 5;
+	uint64 client_id = 6;
+	optional uint64 thread_id = 7; //Uniquely identifying the execution context
 }
 
 message MessageInfo {

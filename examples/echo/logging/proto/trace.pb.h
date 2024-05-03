@@ -401,29 +401,38 @@ class TraceRecord PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMsgInfoFieldNumber = 5,
+    kMsgFieldNumber = 4,
     kTraceTimeFieldNumber = 1,
     kLeaderIdFieldNumber = 3,
-    kThreadIdFieldNumber = 4,
+    kSlotFieldNumber = 5,
+    kClientIdFieldNumber = 6,
+    kThreadIdFieldNumber = 7,
     kTypeFieldNumber = 2,
   };
-  // .trace.MessageInfo msg_info = 5;
-  bool has_msg_info() const;
+  // string msg = 4;
+  void clear_msg();
+  const std::string& msg() const;
+  void set_msg(const std::string& value);
+  void set_msg(std::string&& value);
+  void set_msg(const char* value);
+  void set_msg(const char* value, size_t size);
+  std::string* mutable_msg();
+  std::string* release_msg();
+  void set_allocated_msg(std::string* msg);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_msg();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_msg(
+      std::string* msg);
   private:
-  bool _internal_has_msg_info() const;
+  const std::string& _internal_msg() const;
+  void _internal_set_msg(const std::string& value);
+  std::string* _internal_mutable_msg();
   public:
-  void clear_msg_info();
-  const ::trace::MessageInfo& msg_info() const;
-  ::trace::MessageInfo* release_msg_info();
-  ::trace::MessageInfo* mutable_msg_info();
-  void set_allocated_msg_info(::trace::MessageInfo* msg_info);
-  private:
-  const ::trace::MessageInfo& _internal_msg_info() const;
-  ::trace::MessageInfo* _internal_mutable_msg_info();
-  public:
-  void unsafe_arena_set_allocated_msg_info(
-      ::trace::MessageInfo* msg_info);
-  ::trace::MessageInfo* unsafe_arena_release_msg_info();
 
   // uint64 trace_time = 1;
   void clear_trace_time();
@@ -443,7 +452,25 @@ class TraceRecord PROTOBUF_FINAL :
   void _internal_set_leader_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // uint64 thread_id = 4;
+  // uint64 slot = 5;
+  void clear_slot();
+  ::PROTOBUF_NAMESPACE_ID::uint64 slot() const;
+  void set_slot(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_slot() const;
+  void _internal_set_slot(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // uint64 client_id = 6;
+  void clear_client_id();
+  ::PROTOBUF_NAMESPACE_ID::uint64 client_id() const;
+  void set_client_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_client_id() const;
+  void _internal_set_client_id(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // uint64 thread_id = 7;
   bool has_thread_id() const;
   private:
   bool _internal_has_thread_id() const;
@@ -474,9 +501,11 @@ class TraceRecord PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  ::trace::MessageInfo* msg_info_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr msg_;
   ::PROTOBUF_NAMESPACE_ID::uint64 trace_time_;
   ::PROTOBUF_NAMESPACE_ID::uint64 leader_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 slot_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 client_id_;
   ::PROTOBUF_NAMESPACE_ID::uint64 thread_id_;
   int type_;
   friend struct ::TableStruct_trace_2eproto;
@@ -791,7 +820,128 @@ inline void TraceRecord::set_leader_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:trace.TraceRecord.leader_id)
 }
 
-// uint64 thread_id = 4;
+// string msg = 4;
+inline void TraceRecord::clear_msg() {
+  msg_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& TraceRecord::msg() const {
+  // @@protoc_insertion_point(field_get:trace.TraceRecord.msg)
+  return _internal_msg();
+}
+inline void TraceRecord::set_msg(const std::string& value) {
+  _internal_set_msg(value);
+  // @@protoc_insertion_point(field_set:trace.TraceRecord.msg)
+}
+inline std::string* TraceRecord::mutable_msg() {
+  // @@protoc_insertion_point(field_mutable:trace.TraceRecord.msg)
+  return _internal_mutable_msg();
+}
+inline const std::string& TraceRecord::_internal_msg() const {
+  return msg_.Get();
+}
+inline void TraceRecord::_internal_set_msg(const std::string& value) {
+  
+  msg_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void TraceRecord::set_msg(std::string&& value) {
+  
+  msg_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:trace.TraceRecord.msg)
+}
+inline void TraceRecord::set_msg(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  msg_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:trace.TraceRecord.msg)
+}
+inline void TraceRecord::set_msg(const char* value,
+    size_t size) {
+  
+  msg_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:trace.TraceRecord.msg)
+}
+inline std::string* TraceRecord::_internal_mutable_msg() {
+  
+  return msg_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* TraceRecord::release_msg() {
+  // @@protoc_insertion_point(field_release:trace.TraceRecord.msg)
+  return msg_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void TraceRecord::set_allocated_msg(std::string* msg) {
+  if (msg != nullptr) {
+    
+  } else {
+    
+  }
+  msg_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), msg,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:trace.TraceRecord.msg)
+}
+inline std::string* TraceRecord::unsafe_arena_release_msg() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:trace.TraceRecord.msg)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return msg_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void TraceRecord::unsafe_arena_set_allocated_msg(
+    std::string* msg) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (msg != nullptr) {
+    
+  } else {
+    
+  }
+  msg_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      msg, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:trace.TraceRecord.msg)
+}
+
+// uint64 slot = 5;
+inline void TraceRecord::clear_slot() {
+  slot_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TraceRecord::_internal_slot() const {
+  return slot_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TraceRecord::slot() const {
+  // @@protoc_insertion_point(field_get:trace.TraceRecord.slot)
+  return _internal_slot();
+}
+inline void TraceRecord::_internal_set_slot(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  slot_ = value;
+}
+inline void TraceRecord::set_slot(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_slot(value);
+  // @@protoc_insertion_point(field_set:trace.TraceRecord.slot)
+}
+
+// uint64 client_id = 6;
+inline void TraceRecord::clear_client_id() {
+  client_id_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TraceRecord::_internal_client_id() const {
+  return client_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TraceRecord::client_id() const {
+  // @@protoc_insertion_point(field_get:trace.TraceRecord.client_id)
+  return _internal_client_id();
+}
+inline void TraceRecord::_internal_set_client_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  client_id_ = value;
+}
+inline void TraceRecord::set_client_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_client_id(value);
+  // @@protoc_insertion_point(field_set:trace.TraceRecord.client_id)
+}
+
+// uint64 thread_id = 7;
 inline bool TraceRecord::_internal_has_thread_id() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -817,87 +967,6 @@ inline void TraceRecord::_internal_set_thread_id(::PROTOBUF_NAMESPACE_ID::uint64
 inline void TraceRecord::set_thread_id(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   _internal_set_thread_id(value);
   // @@protoc_insertion_point(field_set:trace.TraceRecord.thread_id)
-}
-
-// .trace.MessageInfo msg_info = 5;
-inline bool TraceRecord::_internal_has_msg_info() const {
-  return this != internal_default_instance() && msg_info_ != nullptr;
-}
-inline bool TraceRecord::has_msg_info() const {
-  return _internal_has_msg_info();
-}
-inline void TraceRecord::clear_msg_info() {
-  if (GetArena() == nullptr && msg_info_ != nullptr) {
-    delete msg_info_;
-  }
-  msg_info_ = nullptr;
-}
-inline const ::trace::MessageInfo& TraceRecord::_internal_msg_info() const {
-  const ::trace::MessageInfo* p = msg_info_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::trace::MessageInfo*>(
-      &::trace::_MessageInfo_default_instance_);
-}
-inline const ::trace::MessageInfo& TraceRecord::msg_info() const {
-  // @@protoc_insertion_point(field_get:trace.TraceRecord.msg_info)
-  return _internal_msg_info();
-}
-inline void TraceRecord::unsafe_arena_set_allocated_msg_info(
-    ::trace::MessageInfo* msg_info) {
-  if (GetArena() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(msg_info_);
-  }
-  msg_info_ = msg_info;
-  if (msg_info) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:trace.TraceRecord.msg_info)
-}
-inline ::trace::MessageInfo* TraceRecord::release_msg_info() {
-  auto temp = unsafe_arena_release_msg_info();
-  if (GetArena() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-  return temp;
-}
-inline ::trace::MessageInfo* TraceRecord::unsafe_arena_release_msg_info() {
-  // @@protoc_insertion_point(field_release:trace.TraceRecord.msg_info)
-  
-  ::trace::MessageInfo* temp = msg_info_;
-  msg_info_ = nullptr;
-  return temp;
-}
-inline ::trace::MessageInfo* TraceRecord::_internal_mutable_msg_info() {
-  
-  if (msg_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::trace::MessageInfo>(GetArena());
-    msg_info_ = p;
-  }
-  return msg_info_;
-}
-inline ::trace::MessageInfo* TraceRecord::mutable_msg_info() {
-  // @@protoc_insertion_point(field_mutable:trace.TraceRecord.msg_info)
-  return _internal_mutable_msg_info();
-}
-inline void TraceRecord::set_allocated_msg_info(::trace::MessageInfo* msg_info) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
-  if (message_arena == nullptr) {
-    delete msg_info_;
-  }
-  if (msg_info) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(msg_info);
-    if (message_arena != submessage_arena) {
-      msg_info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, msg_info, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  msg_info_ = msg_info;
-  // @@protoc_insertion_point(field_set_allocated:trace.TraceRecord.msg_info)
 }
 
 // -------------------------------------------------------------------

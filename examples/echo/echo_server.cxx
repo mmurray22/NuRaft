@@ -27,9 +27,11 @@ limitations under the License.
 #include <sstream>
 
 #include <stdio.h>
+#include <chrono>
+#include <thread>
 
 #include <random>
-#include "logging/logging.hxx"
+//#include "logging/logging.h"
 using namespace nuraft;
 
 namespace echo_server {
@@ -67,8 +69,9 @@ void append_log(const std::string& cmd,
     }
 
     std::string cascaded_str;
-    for (size_t ii=1; ii<tokens.size(); ++ii) {
-        cascaded_str += tokens[ii] + " ";
+    cascaded_str += tokens[1];
+    for (size_t ii=2; ii<tokens.size(); ++ii) {
+        cascaded_str += " " + tokens[ii];
     }
 
     // Create a new log which will contain
@@ -82,7 +85,7 @@ void append_log(const std::string& cmd,
 
     // Do append.
     ptr<raft_result> ret = stuff.raft_instance_->append_entries( {new_log} );
-
+    newTrace->add_trace_entry(1, 0, cascaded_str, 1, 0);
     if (!ret->get_accepted()) {
         // Log append rejected, usually because this node is not a leader.
         std::cout << "failed to replicate: "
@@ -100,6 +103,10 @@ void append_log(const std::string& cmd,
         //   so that `ret` already has the result from state machine.
         ptr<std::exception> err(nullptr);
         handle_result(timer, *ret, err);
+	if (ret->get_result_code() == cmd_result_code::OK)
+	{
+		newTrace->add_trace_entry(2, 0, cascaded_str, 1, 0);
+	}
 
     } else if (CALL_TYPE == raft_params::async_handler) {
         // Async mode:
@@ -172,31 +179,86 @@ bool do_cmd(const std::vector<std::string>& tokens, int server_id) {
     } else if ( cmd == "h" || cmd == "help" ) {
         help(cmd, tokens);
     } else if ( cmd == "order_test" ) {
-	std::string filename = "echo_server";
-	Trace newTrace(0, 0, 3, filename, 30);
-	std::string command1 = "command_one";
-	std::string command2 = "command_two";
 	const std::string& append_log_cmd = "msg";
+	    std::random_device rd;
+	    std::mt19937 gen(rd());
+	    std::uniform_int_distribution<> distribution(1, stuff.server_id_*3);
+	    
+	    
+	std::string filename = "echo_server";
+	std::string command1 = "one";
+	std::string command2 = "two";
+	std::string command3 = "three";
+	if(distribution(gen) <= 3)
+	{
+	newTrace->add_trace_entry(0, 0, command1, 0, 0);
+	newTrace->add_trace_entry(0, 0, command2, 1, 0);
+	printf("Recorded the commands for RECEIVE!");
+
+	std::vector<std::string> cmds;
+	cmds.push_back("msg");
+	cmds.push_back(command1);
+
+	std::this_thread::sleep_for(std::chrono::seconds(10));
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+
+	std::this_thread::sleep_for(std::chrono::seconds(10));
+	cmds.push_back("msg");
+	cmds.push_back(command2);
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+	newTrace->add_trace_entry(0, 0, command3, 2, 0);	
+	cmds.push_back("msg");
+	cmds.push_back(command3);
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+
+	} else {
+	newTrace->add_trace_entry(0, 0, command2, 0, 0);
+	const std::string& append_log_cmd = "msg";
+	std::vector<std::string> cmds;
+	cmds.push_back("msg");
+	cmds.push_back(command2);
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	newTrace->add_trace_entry(0, 0, command1, 1, 0);	
+	cmds.push_back("msg");
+	cmds.push_back(command1);
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+	newTrace->add_trace_entry(0, 0, command3, 2, 0);	
+	cmds.push_back("msg");
+	cmds.push_back(command3);
+	append_log(append_log_cmd, cmds);
+	cmds.clear();
+	}
+	/*const std::string& append_log_cmd = "msg";
 	std::vector<std::string> cmds;
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int> distribution(0,2);
 	if (distribution(generator) == 0) {
 		cmds.push_back("msg");
 		cmds.push_back(command1);
+	//	newTrace->add_trace_entry(0, 0, command1, 0, 0);
 		append_log(append_log_cmd, cmds);
 		cmds.clear();
 		cmds.push_back("msg");
+	//	newTrace->add_trace_entry(0, 0, command2, 1, 0);
 		cmds.push_back(command2);
 		append_log(append_log_cmd, cmds);
 	} else {
 		cmds.push_back("msg");
 		cmds.push_back(command2);
+	//	newTrace->add_trace_entry(0, 0, command2, 0, 0);
 		append_log(append_log_cmd, cmds);
 		cmds.clear();
 		cmds.push_back("msg");
 		cmds.push_back(command1);
+	//	newTrace->add_trace_entry(0, 0, command1, 1, 0);
 		append_log(append_log_cmd, cmds);
-	}
+	}*/
     }
     return true;
 }
@@ -208,12 +270,13 @@ int main(int argc, char** argv) {
     if (argc < 3) usage(argc, argv);
 
     set_server_info(argc, argv);
-
+    newTrace = new Trace(0, stuff.server_id_, 3, "echo_server", 300);
     std::cout << "    -- Echo Server with Raft --" << std::endl;
     std::cout << "               Version 0.1.0" << std::endl;
     std::cout << "    Server ID:    " << stuff.server_id_ << std::endl;
     std::cout << "    Endpoint:     " << stuff.endpoint_ << std::endl;
     init_raft( cs_new<echo_state_machine>() );
+    newTrace = new Trace(stuff.server_id_, 0, 3, "echo_server", 300);
     loop();
 
     return 0;

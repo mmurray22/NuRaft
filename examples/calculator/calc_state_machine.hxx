@@ -25,7 +25,7 @@ limitations under the License.
 #include <mutex>
 
 #include <string.h>
-
+#include "../echo/logging/logging.h"
 using namespace nuraft;
 
 namespace calc_server {

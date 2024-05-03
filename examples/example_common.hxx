@@ -16,6 +16,7 @@ limitations under the License.
 **************************************************************************/
 
 #pragma once
+//#include "logging/logging.h"
 
 using namespace nuraft;
 
@@ -30,6 +31,7 @@ struct server_stuff {
         , sm_(nullptr)
         , smgr_(nullptr)
         , raft_instance_(nullptr)
+//	, newTrace(0, 1, 3, "echo_server", 30)
         {}
 
     void reset() {
@@ -65,9 +67,10 @@ struct server_stuff {
 
     // Raft server instance.
     ptr<raft_server> raft_instance_;
+
+  //  Trace newTrace;
 };
 static server_stuff stuff;
-
 
 void add_server(const std::string& cmd,
                 const std::vector<std::string>& tokens)
@@ -255,5 +258,7 @@ void set_server_info(int argc, char** argv) {
 
     stuff.addr_ = str.substr(0, pos);
     stuff.endpoint_ = stuff.addr_ + ":" + std::to_string(stuff.port_);
+
+//    stuff.newTrace(0, stuff.server_id_, 3, "echo_server", 30);
 }
 

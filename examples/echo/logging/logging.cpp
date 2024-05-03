@@ -1,5 +1,5 @@
 // Implementation of the Trace logging class
-#include "logging.hxx"
+#include "logging.h"
 //#include <format>
 //#include <fmt/core.h>
 
@@ -48,6 +48,7 @@ Trace::Trace(uint64_t node_id,
     {
 	// 3. Write to output file
 	trace_file << serializeOutput << std::endl;
+	std::cout << "Trace file " << trace_file_name << " written to!" << std::endl;
     }
 }
 
@@ -77,25 +78,23 @@ bool Trace::add_trace_entry(uint64_t entry_type,
         return false; // TODO: Create custom error type
     // TODO: Fill in all of the protobuf functions!!
     // 1. Fill in all relevant protobuf information
-    trace::MessageInfo msg_info;
-    msg_info.set_msg(message);
-    msg_info.set_slot(slot);
-    msg_info.set_client_id(client_id);
     trace::TraceRecord trace_entry;
     // Get trace entry time of type std::chrono::time_point_cast<std::chrono::milliseconds>
-    auto trace_timepoint = std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now());
-    auto trace_time = std::chrono::duration_cast<std::chrono::milliseconds>(trace_timepoint.time_since_epoch());
+    auto trace_timepoint = std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::system_clock::now());
+    auto trace_time = std::chrono::duration_cast<std::chrono::microseconds>(trace_timepoint.time_since_epoch());
     trace_entry.set_trace_time(trace_time.count());
     trace_entry.set_leader_id(leader_id);
     // If you need thread_id, do: std::this_thread::get_id()
     trace_entry.set_type(get_entry_type(entry_type)); // TODO: WRONG NEED TO CHANGE!!!
-    trace_entry.set_allocated_msg_info(&msg_info);   
+    trace_entry.set_msg(message);
+    trace_entry.set_slot(slot);
+    trace_entry.set_client_id(client_id);   
     //2. Serialize Message
-    std::string serializeOutput;
-    if (trace_entry.SerializeToString(&serializeOutput)) 
+    std::string serializeOutput = trace_entry.SerializeAsString();
+    if (serializeOutput.length() > 0) 
     {
 	// 3. Write to output file
-	trace_file << serializeOutput << "\n";
+	trace_file << serializeOutput << std::endl;
     }
     return true;
 }

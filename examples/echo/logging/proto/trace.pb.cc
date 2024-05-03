@@ -14,7 +14,6 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_trace_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MessageInfo_trace_2eproto;
 namespace trace {
 class StartTraceDefaultTypeInternal {
  public:
@@ -68,9 +67,8 @@ static void InitDefaultsscc_info_TraceRecord_trace_2eproto() {
   ::trace::TraceRecord::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_TraceRecord_trace_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_TraceRecord_trace_2eproto}, {
-      &scc_info_MessageInfo_trace_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TraceRecord_trace_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_TraceRecord_trace_2eproto}, {}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_trace_2eproto[3];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_trace_2eproto[2];
@@ -93,13 +91,17 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_trace_2eproto::offsets[] PROTO
   PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, trace_time_),
   PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, type_),
   PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, leader_id_),
+  PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, msg_),
+  PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, slot_),
+  PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, client_id_),
   PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, thread_id_),
-  PROTOBUF_FIELD_OFFSET(::trace::TraceRecord, msg_info_),
+  ~0u,
+  ~0u,
+  ~0u,
   ~0u,
   ~0u,
   ~0u,
   0,
-  ~0u,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::trace::MessageInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -111,8 +113,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_trace_2eproto::offsets[] PROTO
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::trace::StartTrace)},
-  { 8, 18, sizeof(::trace::TraceRecord)},
-  { 23, -1, sizeof(::trace::MessageInfo)},
+  { 8, 20, sizeof(::trace::TraceRecord)},
+  { 27, -1, sizeof(::trace::MessageInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -124,16 +126,16 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_trace_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\013trace.proto\022\005trace\"T\n\nStartTrace\022\017\n\007no"
   "de_id\030\001 \001(\004\022!\n\004type\030\002 \001(\0162\023.trace.Orderi"
-  "ngType\022\022\n\nstart_time\030\003 \001(\004\"\240\001\n\013TraceReco"
+  "ngType\022\022\n\nstart_time\030\003 \001(\004\"\250\001\n\013TraceReco"
   "rd\022\022\n\ntrace_time\030\001 \001(\004\022\036\n\004type\030\002 \001(\0162\020.t"
-  "race.EntryType\022\021\n\tleader_id\030\003 \001(\004\022\026\n\tthr"
-  "ead_id\030\004 \001(\004H\000\210\001\001\022$\n\010msg_info\030\005 \001(\0132\022.tr"
-  "ace.MessageInfoB\014\n\n_thread_id\";\n\013Message"
-  "Info\022\013\n\003msg\030\001 \001(\t\022\014\n\004slot\030\002 \001(\004\022\021\n\tclien"
-  "t_id\030\003 \001(\004*>\n\014OrderingType\022\010\n\004TIME\020\000\022\016\n\n"
-  "DEPENDENCY\020\001\022\n\n\006WEIGHT\020\002\022\010\n\004NONE\020\003*:\n\tEn"
-  "tryType\022\013\n\007RECEIVE\020\000\022\n\n\006ASSIGN\020\001\022\n\n\006ACCE"
-  "PT\020\002\022\010\n\004MOOT\020\003b\006proto3"
+  "race.EntryType\022\021\n\tleader_id\030\003 \001(\004\022\013\n\003msg"
+  "\030\004 \001(\t\022\014\n\004slot\030\005 \001(\004\022\021\n\tclient_id\030\006 \001(\004\022"
+  "\026\n\tthread_id\030\007 \001(\004H\000\210\001\001B\014\n\n_thread_id\";\n"
+  "\013MessageInfo\022\013\n\003msg\030\001 \001(\t\022\014\n\004slot\030\002 \001(\004\022"
+  "\021\n\tclient_id\030\003 \001(\004*>\n\014OrderingType\022\010\n\004TI"
+  "ME\020\000\022\016\n\nDEPENDENCY\020\001\022\n\n\006WEIGHT\020\002\022\010\n\004NONE"
+  "\020\003*:\n\tEntryType\022\013\n\007RECEIVE\020\000\022\n\n\006ASSIGN\020\001"
+  "\022\n\n\006ACCEPT\020\002\022\010\n\004MOOT\020\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_trace_2eproto_deps[1] = {
 };
@@ -144,7 +146,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_tra
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_trace_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_trace_2eproto = {
-  false, false, descriptor_table_protodef_trace_2eproto, "trace.proto", 462,
+  false, false, descriptor_table_protodef_trace_2eproto, "trace.proto", 470,
   &descriptor_table_trace_2eproto_once, descriptor_table_trace_2eproto_sccs, descriptor_table_trace_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_trace_2eproto::offsets,
   file_level_metadata_trace_2eproto, 3, file_level_enum_descriptors_trace_2eproto, file_level_service_descriptors_trace_2eproto,
@@ -444,8 +446,6 @@ void StartTrace::InternalSwap(StartTrace* other) {
 // ===================================================================
 
 void TraceRecord::InitAsDefaultInstance() {
-  ::trace::_TraceRecord_default_instance_._instance.get_mutable()->msg_info_ = const_cast< ::trace::MessageInfo*>(
-      ::trace::MessageInfo::internal_default_instance());
 }
 class TraceRecord::_Internal {
  public:
@@ -453,13 +453,8 @@ class TraceRecord::_Internal {
   static void set_has_thread_id(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
-  static const ::trace::MessageInfo& msg_info(const TraceRecord* msg);
 };
 
-const ::trace::MessageInfo&
-TraceRecord::_Internal::msg_info(const TraceRecord* msg) {
-  return *msg->msg_info_;
-}
 TraceRecord::TraceRecord(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
@@ -470,10 +465,10 @@ TraceRecord::TraceRecord(const TraceRecord& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_msg_info()) {
-    msg_info_ = new ::trace::MessageInfo(*from.msg_info_);
-  } else {
-    msg_info_ = nullptr;
+  msg_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_msg().empty()) {
+    msg_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_msg(),
+      GetArena());
   }
   ::memcpy(&trace_time_, &from.trace_time_,
     static_cast<size_t>(reinterpret_cast<char*>(&type_) -
@@ -483,9 +478,10 @@ TraceRecord::TraceRecord(const TraceRecord& from)
 
 void TraceRecord::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_TraceRecord_trace_2eproto.base);
-  ::memset(&msg_info_, 0, static_cast<size_t>(
+  msg_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&trace_time_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&type_) -
-      reinterpret_cast<char*>(&msg_info_)) + sizeof(type_));
+      reinterpret_cast<char*>(&trace_time_)) + sizeof(type_));
 }
 
 TraceRecord::~TraceRecord() {
@@ -496,7 +492,7 @@ TraceRecord::~TraceRecord() {
 
 void TraceRecord::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  if (this != internal_default_instance()) delete msg_info_;
+  msg_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void TraceRecord::ArenaDtor(void* object) {
@@ -520,13 +516,10 @@ void TraceRecord::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArena() == nullptr && msg_info_ != nullptr) {
-    delete msg_info_;
-  }
-  msg_info_ = nullptr;
+  msg_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&trace_time_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&leader_id_) -
-      reinterpret_cast<char*>(&trace_time_)) + sizeof(leader_id_));
+      reinterpret_cast<char*>(&client_id_) -
+      reinterpret_cast<char*>(&trace_time_)) + sizeof(client_id_));
   thread_id_ = PROTOBUF_ULONGLONG(0);
   type_ = 0;
   _has_bits_.Clear();
@@ -564,18 +557,34 @@ const char* TraceRecord::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint64 thread_id = 4;
+      // string msg = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          _Internal::set_has_thread_id(&has_bits);
-          thread_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_msg();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "trace.TraceRecord.msg"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .trace.MessageInfo msg_info = 5;
+      // uint64 slot = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ctx->ParseMessage(_internal_mutable_msg_info(), ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          slot_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 client_id = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          client_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 thread_id = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          _Internal::set_has_thread_id(&has_bits);
+          thread_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -627,18 +636,32 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(3, this->_internal_leader_id(), target);
   }
 
-  // uint64 thread_id = 4;
-  if (_internal_has_thread_id()) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(4, this->_internal_thread_id(), target);
+  // string msg = 4;
+  if (this->msg().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_msg().data(), static_cast<int>(this->_internal_msg().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "trace.TraceRecord.msg");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_msg(), target);
   }
 
-  // .trace.MessageInfo msg_info = 5;
-  if (this->has_msg_info()) {
+  // uint64 slot = 5;
+  if (this->slot() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        5, _Internal::msg_info(this), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(5, this->_internal_slot(), target);
+  }
+
+  // uint64 client_id = 6;
+  if (this->client_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(6, this->_internal_client_id(), target);
+  }
+
+  // uint64 thread_id = 7;
+  if (_internal_has_thread_id()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(7, this->_internal_thread_id(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -657,11 +680,11 @@ size_t TraceRecord::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .trace.MessageInfo msg_info = 5;
-  if (this->has_msg_info()) {
+  // string msg = 4;
+  if (this->msg().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *msg_info_);
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_msg());
   }
 
   // uint64 trace_time = 1;
@@ -678,7 +701,21 @@ size_t TraceRecord::ByteSizeLong() const {
         this->_internal_leader_id());
   }
 
-  // uint64 thread_id = 4;
+  // uint64 slot = 5;
+  if (this->slot() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->_internal_slot());
+  }
+
+  // uint64 client_id = 6;
+  if (this->client_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->_internal_client_id());
+  }
+
+  // uint64 thread_id = 7;
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
@@ -723,14 +760,20 @@ void TraceRecord::MergeFrom(const TraceRecord& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_msg_info()) {
-    _internal_mutable_msg_info()->::trace::MessageInfo::MergeFrom(from._internal_msg_info());
+  if (from.msg().size() > 0) {
+    _internal_set_msg(from._internal_msg());
   }
   if (from.trace_time() != 0) {
     _internal_set_trace_time(from._internal_trace_time());
   }
   if (from.leader_id() != 0) {
     _internal_set_leader_id(from._internal_leader_id());
+  }
+  if (from.slot() != 0) {
+    _internal_set_slot(from._internal_slot());
+  }
+  if (from.client_id() != 0) {
+    _internal_set_client_id(from._internal_client_id());
   }
   if (from._internal_has_thread_id()) {
     _internal_set_thread_id(from._internal_thread_id());
@@ -762,12 +805,13 @@ void TraceRecord::InternalSwap(TraceRecord* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
+  msg_.Swap(&other->msg_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(TraceRecord, type_)
       + sizeof(TraceRecord::type_)
-      - PROTOBUF_FIELD_OFFSET(TraceRecord, msg_info_)>(
-          reinterpret_cast<char*>(&msg_info_),
-          reinterpret_cast<char*>(&other->msg_info_));
+      - PROTOBUF_FIELD_OFFSET(TraceRecord, trace_time_)>(
+          reinterpret_cast<char*>(&trace_time_),
+          reinterpret_cast<char*>(&other->trace_time_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata TraceRecord::GetMetadata() const {

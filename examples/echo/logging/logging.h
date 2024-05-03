@@ -102,7 +102,7 @@ class Trace // TODO: Didn't even think about the fact that the traces are going 
     public:
         Trace(uint64_t node_id, uint64_t ordering_indicator, uint64_t num_nodes, std::string trace_name, uint64_t length_of_test);
         virtual ~Trace();
-		static trace::OrderingType get_ordering_indicator(uint64_t ordering_idx);
+	static trace::OrderingType get_ordering_indicator(uint64_t ordering_idx);
         static trace::EntryType get_entry_type(uint64_t entry);
         bool add_trace_entry(uint64_t entry_type, uint64_t leader_id, std::string message, uint64_t slot, uint64_t client_id);
 

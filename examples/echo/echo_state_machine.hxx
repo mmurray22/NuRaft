@@ -24,7 +24,10 @@ limitations under the License.
 #include <iostream>
 #include <mutex>
 
+#include "logging/logging.h"
 using namespace nuraft;
+
+Trace* newTrace;
 
 class echo_state_machine : public state_machine {
 public:

@@ -198,6 +198,8 @@ bool do_cmd(const std::vector<std::string>& tokens, int server_id) {
         // e.g.) +1
         append_log(cmd, tokens);
 
+    } else if (cmd[0] == '#') { 
+    	// Special character
     } else if ( cmd == "add" ) {
         // e.g.) add 2 localhost:12345
         add_server(cmd, tokens);
